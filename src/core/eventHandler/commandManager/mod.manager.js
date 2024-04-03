@@ -1,3 +1,5 @@
+const {usernameToId} = require("../../../helper/user.helper");
+const {settings} = require("../../../config/server.config");
 const whereAmI = async (bot, user) => {
     const position = await bot.room.players.userMap.get(user.id).position;
     console.log(position)
@@ -5,7 +7,7 @@ const whereAmI = async (bot, user) => {
     bot.whisper.send(user.id, message);
 }
 
-const walkToCoord = async (bot, user) => {
+const walkToCoords = async (bot, user) => {
     // bot.move.sit("fb5a130318c4dabfa0eb8aac", 0).catch(e => console.error(e));
 }
 
@@ -13,10 +15,45 @@ const sitOnObject = async (bot, objectId, index) => {
     bot.move.sit(objectId, index);
 }
 
+const sendMessageToUser = async (bot, user, message) =>{
+    console.log("hello ckeciing ", message);
+    const username = await message.split(' ')[1];
+    console.log("len", username);
+    if(!username.length){
+        return;
+    }
+    console.log("hello1111")
+    const userId = await usernameToId(username.slice(1));
+    console.log("userid", userId);
+    if(!userId){
+        return;
+    }
+    console.log("hello1111")
+    const dataId = `1_on_1:${userId}:${settings.botId}`
+    console.log(dataId);
+    // await bot.direct.send(dataId, "Say 'dead' if it's working!");
+    await bot.direct.send(userId, "Say Nothing and keep silent!");
+}
+
+const say = async (bot, message) => {
+
+}
+
+const getInventory = async (bot)=> {
+    const inventory = await bot.inventory.get();
+    console.log(inventory);
+}
+
+const getOutfit = async (bot, user)=> {
+    const outfit = await bot.player.outfit.get(user.id)
+    console.log(outfit);
+}
+
 module.exports = {
     whereAmI,
     sitOnObject,
-    walkToCoord
+    walkToCoords,
+    sendMessageToUser,
+    getOutfit,
+    getInventory
 }
-
-// 5 1 2.5

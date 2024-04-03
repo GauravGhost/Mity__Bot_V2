@@ -4,6 +4,7 @@ module.exports = {
     Join: require('./join.event'),
     Leave: require('./leave.event'),
     Message: require('./message.event'),
-    Whisper: require('./whisper.event')
+    Whisper: require('./whisper.event'),
+    Move: require('./move.event')
 
 }
