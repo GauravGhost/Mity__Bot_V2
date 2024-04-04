@@ -16,23 +16,20 @@ const sitOnObject = async (bot, objectId, index) => {
 }
 
 const sendMessageToUser = async (bot, user, message) =>{
-    console.log("hello ckeciing ", message);
     const username = await message.split(' ')[1];
-    console.log("len", username);
-    if(!username.length){
+
+    if(!username){
         return;
     }
-    console.log("hello1111")
+
     const userId = await usernameToId(username.slice(1));
     console.log("userid", userId);
     if(!userId){
         return;
     }
-    console.log("hello1111")
+
     const dataId = `1_on_1:${userId}:${settings.botId}`
-    console.log(dataId);
-    // await bot.direct.send(dataId, "Say 'dead' if it's working!");
-    await bot.direct.send(userId, "Say Nothing and keep silent!");
+    await bot.direct.send(dataId, "Say 'dead' if it's working!");
 }
 
 const say = async (bot, message) => {

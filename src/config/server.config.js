@@ -6,6 +6,7 @@ dotenv.config();
 module.exports = {
     ROOM_ID: process.env.ROOM_ID,
     TOKEN_ID: process.env.TOKEN_ID,
+    TOKEN_ID2: process.env.TOKEN_ID2,
     HIGHRISE_BASE_URL: process.env.HIGHRISE_BASE_URL,
     DIRECT_MSG_ID: process.env.DIRECT_MSG_ID,
 

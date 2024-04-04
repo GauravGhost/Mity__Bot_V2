@@ -1,5 +1,6 @@
 const bot = require('./core/bot');
-const { TOKEN_ID, ROOM_ID } = require("./config/server.config");
+const bot2 = require('./core/bot2')
+const { TOKEN_ID, ROOM_ID, TOKEN_ID2} = require("./config/server.config");
 
 process.on('unhandledRejection', async (err, promise) => {
     console.error("Error from unhandledRejection");
@@ -9,3 +10,4 @@ process.on('unhandledRejection', async (err, promise) => {
 
 // Login to the room.
 bot.login(TOKEN_ID, ROOM_ID);
+// bot2.login(TOKEN_ID2, ROOM_ID);

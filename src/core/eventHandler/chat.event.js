@@ -1,19 +1,27 @@
 const {settings} = require("../../config/server.config");
-const {ping} = require("./commandManager/general.manager");
+const {ping, emote} = require("./commandManager/general.manager");
 const {cmd} = require("../../helper/constant");
 const {whereAmI, sendMessageToUser, getOutfit, getInventory} = require("./commandManager/mod.manager");
 
 const chatHandler = async (bot, user, message, whisper = false) => {
+    console.log(`[CHAT]: ${user.username}:${user.id} - ${message}`);
+    if (message.includes('@' + settings.botName)) return;
+
+    // Getting Necessary Details.
     const prefix = settings.prefix;
     const permission = await bot.player.permissions.get(user.id);
     const isModerator = permission.moderator || false;
     const isOwner = user.id === settings.ownerId;
-
     let command = message.startsWith(prefix) ? message.slice(prefix.length).split(' ')[0] : '';
 
+    // COMMAND HANDLER which starts with prefix.
     switch (command) {
         case cmd.PING:
             await ping(bot);
+            break;
+
+        case cmd.EMOTE:
+            await emote(bot, isModerator, user, message);
             break;
 
         // MOD COMMANDS
@@ -33,14 +41,11 @@ const chatHandler = async (bot, user, message, whisper = false) => {
             break;
 
         case cmd.OUTFIT:
-            isOwner ? await getOutfit(bot, user) : (() => {});
+            isOwner ? await getOutfit(bot, user) : (() => {
+            });
     }
-    console.log(isModerator);
-    console.log(`[CHAT]: ${user.username}:${user.id} - ${message}`);
 
 }
 module.exports = {
     chatHandler
 }
-
-// 'pants-n_starteritems2019cuffedjeanswhite',

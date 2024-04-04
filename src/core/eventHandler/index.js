@@ -5,6 +5,7 @@ module.exports = {
     Leave: require('./leave.event'),
     Message: require('./message.event'),
     Whisper: require('./whisper.event'),
-    Move: require('./move.event')
+    Move: require('./move.event'),
+    Emote: require('./emote.event')
 
 }

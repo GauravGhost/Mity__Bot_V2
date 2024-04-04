@@ -8,7 +8,7 @@ const {
     Leave,
     Message,
     Join,
-    Whisper, Move
+    Whisper, Move, Emote
 } = require("./eventHandler");
 
 // New instance of the Highrise class
@@ -20,7 +20,8 @@ const bot = new Highrise({
         GatewayIntentBits.Leaves,
         GatewayIntentBits.Error,
         GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.Movements
+        GatewayIntentBits.Movements,
+        GatewayIntentBits.Emotes
     ],
     AutoFetchMessages: true,
     cache: true
@@ -33,6 +34,7 @@ bot.on("whisperCreate", async (user, message) => await Whisper.whisperHandler(bo
 bot.on("messageCreate", async (user_id, data, message) => await Message.messageHandler(bot, user_id, data, message));
 bot.on("playerJoin", async (user) => await Join.joinHandler(bot, user));
 bot.on("playerLeave", async (user) => await Leave.leaveHandler(bot, user));
+bot.on("playerEmote", async (sender, receiver, emote) => await Emote.emoteHandler(bot, sender, receiver, emote));
 
 // bot.on("playerMove", async (user, anchor) => await Move.movementHandler(bot, user, anchor));
 
