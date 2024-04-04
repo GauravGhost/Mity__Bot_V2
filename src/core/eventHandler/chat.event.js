@@ -1,7 +1,7 @@
 const {settings} = require("../../config/server.config");
-const {ping, emote} = require("./commandManager/general.manager");
+const {ping, emote, bhagavadHandler} = require("./commandManager/general.manager");
 const {cmd} = require("../../helper/constant");
-const {whereAmI, sendMessageToUser, getOutfit, getInventory} = require("./commandManager/mod.manager");
+const {whereAmI, sendMessageToUser, getOutfit, getInventory, say} = require("./commandManager/mod.manager");
 
 const chatHandler = async (bot, user, message, whisper = false) => {
     console.log(`[CHAT]: ${user.username}:${user.id} - ${message}`);
@@ -24,9 +24,18 @@ const chatHandler = async (bot, user, message, whisper = false) => {
             await emote(bot, isModerator, user, message);
             break;
 
+        case cmd.VERSE:
+            await bhagavadHandler(bot, user);
+            break;
+
         // MOD COMMANDS
         case cmd.WHEREAMI:
             isModerator ? await whereAmI(bot, user) : (() => {
+            })();
+            break;
+
+        case cmd.SAY:
+            isOwner ? await say(bot, message) : (() => {
             })();
             break;
 

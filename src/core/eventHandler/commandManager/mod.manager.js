@@ -16,16 +16,16 @@ const sitOnObject = async (bot, objectId, index) => {
     bot.move.sit(objectId, index);
 }
 
-const sendMessageToUser = async (bot, user, message) =>{
+const sendMessageToUser = async (bot, user, message) => {
     const username = await message.split(' ')[1];
 
-    if(!username){
+    if (!username) {
         return;
     }
 
     const userId = await usernameToId(username.slice(1));
     console.log("userid", userId);
-    if(!userId){
+    if (!userId) {
         return;
     }
 
@@ -34,15 +34,16 @@ const sendMessageToUser = async (bot, user, message) =>{
 }
 
 const say = async (bot, message) => {
-
+    const messageArray = message.split('!say ')
+    bot.message.send(messageArray[1]);
 }
 
-const getInventory = async (bot)=> {
+const getInventory = async (bot) => {
     const inventory = await bot.inventory.get();
     console.log(inventory);
 }
 
-const getOutfit = async (bot, user)=> {
+const getOutfit = async (bot, user) => {
     const outfit = await bot.player.outfit.get(user.id)
     console.log(outfit);
 }
@@ -53,5 +54,6 @@ module.exports = {
     walkToCoords,
     sendMessageToUser,
     getOutfit,
-    getInventory
+    getInventory,
+    say
 }

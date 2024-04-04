@@ -1,6 +1,7 @@
 // PING MESSAGE COMMAND - ping
 const {getRandomEmote, getEmoteList, emoteNameToId} = require("../../../helper/utils");
 const {usernameToId} = require("../../../helper/user.helper");
+const {getSummaryByChapter} = require("../../../external/bhagwad.gita.api");
 
 const ping = async (bot) => {
     bot.message.send(`I'm Alive`)
@@ -85,7 +86,13 @@ const emoteList = async (bot, id) => {
     // bot.whisper.send(id, chunkArray[1].join(''))
 }
 
+const bhagavadHandler = async (bot, user) => {
+    const response = await getSummaryByChapter(1);
+    await bot.message.send(response.chapter_summary);
+}
+
 module.exports = {
     ping,
-    emote
+    emote,
+    bhagavadHandler
 }

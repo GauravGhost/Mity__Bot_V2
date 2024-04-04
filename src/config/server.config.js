@@ -27,5 +27,8 @@ module.exports = {
         },
         reconnect: 5,
         reactionName: 'wave'
-    }
+    },
+
+    BHAGAVAD_API_KEY: process.env.BHAGAVAD_API_KEY,
+    BHAGAVAD_API_HOST: process.env.BHAGAVAD_API_HOST
 }
