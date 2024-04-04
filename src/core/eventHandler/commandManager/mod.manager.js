@@ -1,5 +1,6 @@
 const {usernameToId} = require("../../../helper/user.helper");
 const {settings} = require("../../../config/server.config");
+
 const whereAmI = async (bot, user) => {
     const position = await bot.room.players.userMap.get(user.id).position;
     console.log(position)
