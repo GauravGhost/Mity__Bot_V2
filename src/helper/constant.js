@@ -7,6 +7,7 @@ const cmd = {
     SEND: 'send',
 
     OUTFIT: 'outfit',
+    CHANGE_OUTFIT: 'newfit',
     INVENTORY: 'inventory',
 
     VERSE: 'verse'
