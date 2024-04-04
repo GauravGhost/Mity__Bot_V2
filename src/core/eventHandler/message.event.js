@@ -6,6 +6,7 @@ const messageHandler = async (bot, user_id, data, message) => {
     console.log("logged in direct message detected!", user_id);
     const response = await WebApi.getUserProfile(user_id);
     console.log("data", data);
+
     const username = response.user.username;
     const messages = await bot.inbox.messages.get(data.id);
     const userMessages = messages.filter((message) => message.sender_id === user_id);

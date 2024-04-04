@@ -1,0 +1,65 @@
+[
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "body-flesh",
+    "account_bound": false,
+    "active_palette": 27
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "shoes-n_room12019bootsblack",
+    "account_bound": false,
+    "active_palette": -1
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "hair_front-n_malenew01",
+    "account_bound": false,
+    "active_palette": 1
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "pants-n_room12019formalslacksblack",
+    "account_bound": false,
+    "active_palette": -1
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "shirt-n_flashysuit",
+    "account_bound": false,
+    "active_palette": -1
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "hair_back-n_malenew01",
+    "account_bound": false,
+    "active_palette": 1
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "eyebrow-n_02",
+    "account_bound": false,
+    "active_palette": 0
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "nose-n_01",
+    "account_bound": false,
+    "active_palette": 0
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "eye-n_basic2018zanyeyes",
+    "account_bound": false,
+    "active_palette": 7
+  }
+]

@@ -1,7 +1,14 @@
 const {settings} = require("../../config/server.config");
 const {ping, emote, bhagavadHandler} = require("./commandManager/general.manager");
 const {cmd} = require("../../helper/constant");
-const {whereAmI, sendMessageToUser, getOutfit, getInventory, say} = require("./commandManager/mod.manager");
+const {
+    whereAmI,
+    sendMessageToUser,
+    getOutfit,
+    getInventory,
+    say,
+    changeOutfit
+} = require("./commandManager/mod.manager");
 
 const chatHandler = async (bot, user, message, whisper = false) => {
     console.log(`[CHAT]: ${user.username}:${user.id} - ${message}`);
@@ -30,28 +37,28 @@ const chatHandler = async (bot, user, message, whisper = false) => {
 
         // MOD COMMANDS
         case cmd.WHEREAMI:
-            isModerator ? await whereAmI(bot, user) : (() => {
-            })();
+            isModerator ? await whereAmI(bot, user) : null;
             break;
 
         case cmd.SAY:
-            isOwner ? await say(bot, message) : (() => {
-            })();
+            isOwner ? await say(bot, message) : null;
             break;
 
         case cmd.SEND:
-            isOwner ? await sendMessageToUser(bot, user, message) : (() => {
-            })();
+            isOwner ? await sendMessageToUser(bot, user, message) : null;
             break;
 
         case cmd.INVENTORY:
-            isOwner ? await getInventory(bot) : (() => {
-            })();
+            isOwner ? await getInventory(bot) : null;
             break;
 
         case cmd.OUTFIT:
-            isOwner ? await getOutfit(bot, user) : (() => {
-            });
+            await getOutfit(bot, user);
+            break;
+
+        case cmd.CHANGE_OUTFIT:
+            isOwner ? await changeOutfit(bot, message) : null;
+            break;
     }
 
 }

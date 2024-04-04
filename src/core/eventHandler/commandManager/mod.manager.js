@@ -1,5 +1,9 @@
 const {usernameToId} = require("../../../helper/user.helper");
 const {settings} = require("../../../config/server.config");
+const fs = require('node:fs')
+const path = require('node:path')
+const {outfitPath} = require("../../../helper/path.helper");
+const {isFileExist} = require("../../../helper/fs.helper");
 
 const whereAmI = async (bot, user) => {
     const position = await bot.room.players.userMap.get(user.id).position;
@@ -24,7 +28,6 @@ const sendMessageToUser = async (bot, user, message) => {
     }
 
     const userId = await usernameToId(username.slice(1));
-    console.log("userid", userId);
     if (!userId) {
         return;
     }
@@ -48,6 +51,17 @@ const getOutfit = async (bot, user) => {
     console.log(outfit);
 }
 
+const changeOutfit = async (bot, message) => {
+    const number = message.split(' ')[1];
+    const filePath = outfitPath('outfit' + number);
+    if (isFileExist(filePath)) {
+        const outfitJson = fs.readFileSync(filePath, 'utf8');
+        const outfit = JSON.parse(outfitJson);
+        await bot.outfit.change(outfit);
+    }
+}
+
+
 module.exports = {
     whereAmI,
     sitOnObject,
@@ -55,5 +69,6 @@ module.exports = {
     sendMessageToUser,
     getOutfit,
     getInventory,
-    say
+    say,
+    changeOutfit
 }

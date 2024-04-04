@@ -1,0 +1,9 @@
+[
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "body-flesh",
+    "account_bound": false,
+    "active_palette": 27
+  }
+]
