@@ -1,4 +1,4 @@
-const {ping, emote} = require("./general.manager");
+const {ping, emote, gita} = require("./general.manager");
 const {isMod, isOwner} = require("../../../helper/utils");
 const {cmd} = require("../../../helper/constant");
 const {say, sendMessageToUser, getOutfit, changeOutfit, whereAmI, getInventory} = require("./mod.manager");
@@ -52,6 +52,12 @@ class ChangeOutfitCommand {
     }
 }
 
+class GitaCommand {
+    async execute(bot, user, message) {
+        await gita(bot, user, message);
+    }
+}
+
 /**
  * @description Initialize the commands in the given Command Class.
  * @constructor commandInvoker
@@ -71,6 +77,7 @@ class CommandInitializer {
         this.command.registerCommand(cmd.INVENTORY, new InventoryCommand());
         this.command.registerCommand(cmd.OUTFIT, new OutfitCommand());
         this.command.registerCommand(cmd.CHANGE_OUTFIT, new ChangeOutfitCommand());
+        this.command.registerCommand(cmd.GITA, new GitaCommand());
     }
 }
 

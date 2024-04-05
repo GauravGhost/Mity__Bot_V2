@@ -6,7 +6,6 @@ const {isFileExist, readFileSync} = require("../../../helper/fs.helper");
 
 const whereAmI = async (bot, user) => {
     const position = await bot.room.players.userMap.get(user.id).position;
-    console.log(position)
     const message = `x: ${position.x} \n y: ${position.y}, \n z: ${position.z}, \n facing: ${position.facing}`;
     bot.whisper.send(user.id, message);
 }
@@ -61,6 +60,11 @@ const changeOutfit = async (bot, user, message) => {
         const outfit = JSON.parse(outfitJson);
         await bot.outfit.change(outfit);
     }
+}
+
+const teleport = async (bot, user, message) => {
+    const position = await bot.room.players.userMap.get(user.id).position;
+    const messageArray = message.split(' ');
 }
 
 

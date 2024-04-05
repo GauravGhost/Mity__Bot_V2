@@ -10,7 +10,7 @@ const cmd = {
     CHANGE_OUTFIT: 'newfit',
     INVENTORY: 'inventory',
 
-    VERSE: 'verse'
+    GITA: 'gita'
 }
 
 module.exports = {

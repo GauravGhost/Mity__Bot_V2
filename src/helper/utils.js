@@ -61,4 +61,16 @@ module.exports = {
         const players = await bot.room.players.fetch();
         return players.length ? players.length : 0;
     },
-}
+
+    /**
+     * Generates a random number between min (inclusive) and max (inclusive).
+     * @param {number} min - The minimum value of the range.
+     * @param {number} max - The maximum value of the range.
+     * @returns {number} A random number between min and max, inclusive.
+     */
+    randomNumberInRange: (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+};

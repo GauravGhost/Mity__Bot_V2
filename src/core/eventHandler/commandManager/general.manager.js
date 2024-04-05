@@ -1,12 +1,20 @@
 // PING MESSAGE COMMAND - ping
-const {getRandomEmote, getEmoteList, emoteNameToId, isMod} = require("../../../helper/utils");
+const {getRandomEmote, getEmoteList, emoteNameToId, isMod, randomNumberInRange} = require("../../../helper/utils");
 const {usernameToId} = require("../../../helper/user.helper");
-const {getSummaryByChapter} = require("../../../external/bhagwad.gita.api");
+const {getSummaryByChapter, getVerse} = require("../../../external/bhagwad.gita.api");
+const WordStream = require('../../../helper/stream.helper');
+
 
 const ping = async (bot) => {
     bot.message.send(`I'm Alive`)
 }
-
+/**
+ * @description Emote Handler
+ * @param bot
+ * @param user
+ * @param message
+ * @return {Promise<void>}
+ */
 const emote = async (bot, user, message) => {
     const isModerator = await isMod(bot, user);
     const messageArray = message.split(' ');
@@ -84,14 +92,52 @@ const emoteList = async (bot, id) => {
     }));
 
 }
+/**
+ * @description Gita Handler
+ * @param bot
+ * @param user
+ * @param message
+ * @return {Promise<void>}
+ */
+const gita = async (bot, user, message) => {
+    const messageArray = message.split(' ');
+    console.log(messageArray);
+    const len = messageArray.length;
+    if (len === 1) {
+        await getGitaChapterSummary(bot);
+    } else if (len === 3) {
+        await getGitaVerse(bot, messageArray[1], messageArray[2]);
+    }
+}
 
-const bhagavadHandler = async (bot, user) => {
-    const response = await getSummaryByChapter(1);
-    await bot.message.send(response.chapter_summary);
+const getGitaChapterSummary = async (bot, chapterNumber = randomNumberInRange(1, 17)) => {
+    try {
+        const response = await getSummaryByChapter(chapterNumber);
+        const wordStream = new WordStream(response.chapter_summary);
+
+        wordStream.on('data', async chunk => {
+            await bot.message.send(chunk.toString());
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getGitaVerse = async (bot, chapterNumber, verseNumber) => {
+    try {
+        if(!Number(chapterNumber) || !Number(verseNumber)) return;
+        const response = await getVerse(chapterNumber, verseNumber);
+        const wordStream = new WordStream(response.translations[0].description);
+        wordStream.on('data', async chunk => {
+            await bot.message.send(chunk.toString());
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = {
     ping,
     emote,
-    bhagavadHandler
+    gita
 }
