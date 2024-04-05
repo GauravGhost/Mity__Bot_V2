@@ -1,9 +1,8 @@
 const {usernameToId} = require("../../../helper/user.helper");
 const {settings} = require("../../../config/server.config");
 const fs = require('node:fs')
-const path = require('node:path')
 const {outfitPath} = require("../../../helper/path.helper");
-const {isFileExist} = require("../../../helper/fs.helper");
+const {isFileExist, readFileSync} = require("../../../helper/fs.helper");
 
 const whereAmI = async (bot, user) => {
     const position = await bot.room.players.userMap.get(user.id).position;
@@ -36,8 +35,11 @@ const sendMessageToUser = async (bot, user, message) => {
     await bot.direct.send(dataId, "Say 'dead' if it's working!");
 }
 
-const say = async (bot, message) => {
-    const messageArray = message.split('!say ')
+const say = async (bot, user, message) => {
+    const messageArray = message.split(`${settings.prefix}say `)
+    if(messageArray.length === 1){
+        bot.whisper.send(user.id, `Usage: ${settings.prefix}say <what you want the bot to say>`)
+    }
     bot.message.send(messageArray[1]);
 }
 
@@ -51,11 +53,11 @@ const getOutfit = async (bot, user) => {
     console.log(outfit);
 }
 
-const changeOutfit = async (bot, message) => {
+const changeOutfit = async (bot, user, message) => {
     const number = message.split(' ')[1];
     const filePath = outfitPath('outfit' + number);
     if (isFileExist(filePath)) {
-        const outfitJson = fs.readFileSync(filePath, 'utf8');
+        const outfitJson = readFileSync(filePath)
         const outfit = JSON.parse(outfitJson);
         await bot.outfit.change(outfit);
     }

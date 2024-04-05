@@ -1,5 +1,5 @@
 // PING MESSAGE COMMAND - ping
-const {getRandomEmote, getEmoteList, emoteNameToId} = require("../../../helper/utils");
+const {getRandomEmote, getEmoteList, emoteNameToId, isMod} = require("../../../helper/utils");
 const {usernameToId} = require("../../../helper/user.helper");
 const {getSummaryByChapter} = require("../../../external/bhagwad.gita.api");
 
@@ -7,7 +7,8 @@ const ping = async (bot) => {
     bot.message.send(`I'm Alive`)
 }
 
-const emote = async (bot, isModerator, user, message) => {
+const emote = async (bot, user, message) => {
+    const isModerator = await isMod(bot, user);
     const messageArray = message.split(' ');
     console.log(message, messageArray);
     const len = messageArray.length;
@@ -24,7 +25,7 @@ const emote = async (bot, isModerator, user, message) => {
     }
     /**
      * @description if message length is 3.
-     * @example !emote @Mity__ emote-yes
+     * @example !emote @Mity__ yes
      */
     else if (len === 3) {
         if (!messageArray[1].startsWith('@')) {
@@ -76,14 +77,12 @@ const emoteList = async (bot, id) => {
         return acc;
     }, []);
 
-    // console.log(chunkArray.length);
-    // console.log(chunkArray);
+
     await Promise.all(chunkArray.map(async (chunk) => {
         console.log("list of array ", chunk.join('').length);
         await bot.whisper.send(id, chunk.join(''));
     }));
-    // chunkArray.forEach( chunk => bot.whisper.send(id, chunk.join('')));
-    // bot.whisper.send(id, chunkArray[1].join(''))
+
 }
 
 const bhagavadHandler = async (bot, user) => {
