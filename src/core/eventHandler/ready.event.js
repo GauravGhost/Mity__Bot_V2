@@ -1,6 +1,7 @@
 const {settings} = require("../../config/server.config");
 const commandInvoker = require('./commandManager/command.invoke');
 const {CommandInitializer} = require("./commandManager/command.model");
+const {itemFetch} = require("../../helper/utils");
 user = {
     id: settings.ownerId,
     username: settings.ownerName
@@ -15,11 +16,11 @@ const readyHandler = async (bot, session) => {
     commandInitializer.initialiseChatCommand();
 
     // To Invoke any event or command from within the application.
-    test(bot);
+    // test(bot);
 }
 
 const test = (bot)=> {
-    bot.emit('chatCreate', user, "!ping");
+    bot.emit('chatCreate', user, "newfit 2");
 }
 
 module.exports = {readyHandler}

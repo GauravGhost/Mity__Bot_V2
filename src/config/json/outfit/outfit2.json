@@ -1,0 +1,65 @@
+[
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "body-flesh",
+    "account_bound": false,
+    "active_palette": 27
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "id": "skirt-n_room22019skirtwithsocksplaid",
+    "account_bound": false,
+    "active_palette": null
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "account_bound": false,
+    "active_palette": null,
+    "id": "shoes-n_starteritems2018conversewhite"
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "account_bound": false,
+    "active_palette": null,
+    "id": "shirt-n_room22109plaidjacket"
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "account_bound": false,
+    "active_palette": null,
+    "id": "pants-n_starteritems2019cuffedjeansblack"
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "account_bound": false,
+    "active_palette": null,
+    "id": "hair_front-n_malenew07"
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "account_bound": false,
+    "active_palette": null,
+    "id": "hair_back-n_malenew07"
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "account_bound": false,
+    "active_palette": null,
+    "id": "mouth-basic2018chubbymouth"
+  },
+  {
+    "type": "clothing",
+    "amount": 1,
+    "account_bound": false,
+    "active_palette": null,
+    "id": "nose-n_basic2018newnose20"
+  }
+]

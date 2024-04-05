@@ -1,5 +1,7 @@
 const emotes = require('../config/json/emotes.json')
-const {settings} = require("../config/server.config");
+const {settings, HIGHRISE_BASE_URL} = require("../config/server.config");
+const axios = require("axios");
+
 module.exports = {
     /**
      * @description Return Random id of emote.
@@ -72,5 +74,11 @@ module.exports = {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    itemFetch: async (url) => {
+        url = HIGHRISE_BASE_URL + "/items?limit=2&sort_order=desc&rarity=none"
+        const response = await axios.get(url);
+        console.log(response.data);
     }
 };

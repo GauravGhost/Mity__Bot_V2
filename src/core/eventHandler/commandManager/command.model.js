@@ -1,7 +1,7 @@
 const {ping, emote, gita} = require("./general.manager");
 const {isMod, isOwner} = require("../../../helper/utils");
 const {cmd} = require("../../../helper/constant");
-const {say, sendMessageToUser, getOutfit, changeOutfit, whereAmI, getInventory} = require("./mod.manager");
+const {say, sendMessageToUser, getOutfit, changeOutfit, whereAmI, getInventory, here} = require("./mod.manager");
 
 
 class PingCommand {
@@ -48,13 +48,19 @@ class OutfitCommand {
 
 class ChangeOutfitCommand {
     async execute(bot, user, message) {
-        await changeOutfit(bot, user, message);
+        if(isOwner) await changeOutfit(bot, user, message);
     }
 }
 
 class GitaCommand {
     async execute(bot, user, message) {
         await gita(bot, user, message);
+    }
+}
+
+class HereCommand {
+    async execute(bot, user, message) {
+        if(isMod) await here(bot, user, message);
     }
 }
 
@@ -78,6 +84,7 @@ class CommandInitializer {
         this.command.registerCommand(cmd.OUTFIT, new OutfitCommand());
         this.command.registerCommand(cmd.CHANGE_OUTFIT, new ChangeOutfitCommand());
         this.command.registerCommand(cmd.GITA, new GitaCommand());
+        this.command.registerCommand(cmd.HERE, new HereCommand());
     }
 }
 

@@ -36,7 +36,7 @@ const sendMessageToUser = async (bot, user, message) => {
 
 const say = async (bot, user, message) => {
     const messageArray = message.split(`${settings.prefix}say `)
-    if(messageArray.length === 1){
+    if (messageArray.length === 1) {
         bot.whisper.send(user.id, `Usage: ${settings.prefix}say <what you want the bot to say>`)
     }
     bot.message.send(messageArray[1]);
@@ -63,10 +63,23 @@ const changeOutfit = async (bot, user, message) => {
 }
 
 const teleport = async (bot, user, message) => {
-    const position = await bot.room.players.userMap.get(user.id).position;
+    const position = await bot.room.players.position(user.id);
+    console.log(position);
     const messageArray = message.split(' ');
+
+
 }
 
+const here = async (bot, user, message) => {
+    const position = await bot.room.players.userMap.get(user.id).position;
+    const messageArray = message.split(' ');
+    const len = messageArray.length;
+    if (len === 2 && messageArray[1].startsWith('@')) {
+        const id = await bot.room.players.cache.id() || user.id;
+        console.log(id);
+        await bot.player.teleport(id, position.x, position.y, position.z);
+    }
+}
 
 module.exports = {
     whereAmI,
@@ -76,5 +89,6 @@ module.exports = {
     getOutfit,
     getInventory,
     say,
-    changeOutfit
+    changeOutfit,
+    here
 }
