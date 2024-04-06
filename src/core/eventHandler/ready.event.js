@@ -18,7 +18,7 @@ const readyHandler = async (bot, session) => {
     commandInitializer.initialiseChatCommand();
 
     // To Invoke any event or command from within the application.
-    test(bot);
+    // test(bot);
 }
 
 const test = (bot)=> {

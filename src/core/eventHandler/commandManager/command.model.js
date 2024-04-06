@@ -3,6 +3,7 @@ const {isMod, isOwner} = require("../../../helper/utils");
 const {cmd} = require("../../../helper/constant");
 const {say, sendMessageToUser, getOutfit, changeOutfit, whereAmI, getInventory, here} = require("./mod.manager");
 const {wallet, buy} = require("./wallet.manager");
+const {tip} = require("./tip.manager");
 
 
 class PingCommand {
@@ -77,6 +78,12 @@ class BuyCommand {
     }
 }
 
+class TipCommand {
+    async execute(bot, user, message) {
+        if(await isMod(bot, user)) await tip(bot, user, message);
+    }
+}
+
 /**
  * @description Initialize the commands in the given Command Class.
  * @constructor commandInvoker
@@ -100,6 +107,7 @@ class CommandInitializer {
         this.command.registerCommand(cmd.HERE, new HereCommand());
         this.command.registerCommand(cmd.WALLET, new WalletCommand());
         this.command.registerCommand(cmd.BUY, new BuyCommand());
+        this.command.registerCommand(cmd.TIP, new TipCommand());
     }
 
     initializeDirectMessageCommand() {

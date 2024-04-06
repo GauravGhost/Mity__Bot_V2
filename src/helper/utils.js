@@ -10,7 +10,13 @@ module.exports = {
     getRandomEmote: () => {
         return emotes[Math.floor(Math.random() * emotes.length)];
     },
-
+    /**
+     * @description get Random number between 0 and given range.
+     * @return {*}
+     */
+    getRandomIndex: (maxLength) => {
+        return Math.floor(Math.random() * emotes.length);
+    },
     /**
      * @description Return the Array of emotes with numbering
      * @return string[]
@@ -34,6 +40,17 @@ module.exports = {
      */
     isMod: async (bot, user) => {
         const permission = await bot.player.permissions.get(user.id);
+        return permission.moderator || false;
+    },
+
+    /**
+     * @description Return true if user is moderator
+     * @param bot
+     * @param id
+     * @return {Promise<Boolean>}
+     */
+    isModById: async (bot, id) => {
+        const permission = await bot.player.permissions.get(id);
         return permission.moderator || false;
     },
 

@@ -64,7 +64,8 @@ const buyBoost = async (bot, user, message) => {
     if (gold < minGoldRequired) {
         throw new ChatError(`You need at least ${minGoldRequired} to buy boost. You gold is ${gold}g`)
     }
-    return await bot.wallet.buy.boost(buyMethod, amount);
+    await bot.wallet.buy.boost(buyMethod, amount);
+    bot.message.send('Purchase Successful');
 
 }
 
@@ -94,6 +95,7 @@ const buyVoice = async (bot, user, message) => {
         throw new ChatError(`You need at least 200 to buy boost. You gold is ${gold}g`)
     }
     await bot.wallet.buy.voice(buyMethod);
+    bot.message.send('Purchase Successful');
 }
 
 
