@@ -1,8 +1,8 @@
 const {settings} = require("../../config/server.config");
 const commandInvoker = require('./commandManager/command.invoke');
+const CatchAsync = require('../../helper/catchAsync');
 
-
-const chatHandler = async (bot, user, message, whisper = false) => {
+const chatHandler = CatchAsync(async (bot, user, message, whisper = false) => {
     console.log(`[CHAT]: ${user.username}:${user.id} - ${message}`);
 
     // If someone mention Bot in command or Bot sends message, It will be returned from here.
@@ -16,12 +16,8 @@ const chatHandler = async (bot, user, message, whisper = false) => {
      * @description This will execute all the commands which has been registered from the ready event function.
      * @important Command Invoker is a singleton class -> It will return the same instance wherever it will be called.
      */
-    try {
-        await commandInvoker.executeCommand(command, bot, user, message);
-    } catch (error) {
-        console.log(error);
-    }
-}
+        return await commandInvoker.executeCommand(command, bot, user, message);
+})
 module.exports = {
     chatHandler
 }

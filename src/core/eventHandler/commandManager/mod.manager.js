@@ -1,8 +1,8 @@
 const {usernameToId} = require("../../../helper/user.helper");
 const {settings} = require("../../../config/server.config");
-const fs = require('node:fs')
 const {outfitPath} = require("../../../helper/path.helper");
 const {isFileExist, readFileSync} = require("../../../helper/fs.helper");
+const {ChatError} = require("../../../error/chat.error");
 
 const whereAmI = async (bot, user) => {
     const position = await bot.room.players.userMap.get(user.id).position;
@@ -75,8 +75,10 @@ const here = async (bot, user, message) => {
     const messageArray = message.split(' ');
     const len = messageArray.length;
     if (len === 2 && messageArray[1].startsWith('@')) {
-        const id = await bot.room.players.cache.id() || user.id;
-        console.log(id);
+        const id = await bot.room.players.cache.id(messageArray[1].slice(1));
+        if(!id){
+            throw new ChatError("Invalid User Id");
+        }
         await bot.player.teleport(id, position.x, position.y, position.z);
     }
 }

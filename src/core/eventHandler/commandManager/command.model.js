@@ -2,6 +2,7 @@ const {ping, emote, gita} = require("./general.manager");
 const {isMod, isOwner} = require("../../../helper/utils");
 const {cmd} = require("../../../helper/constant");
 const {say, sendMessageToUser, getOutfit, changeOutfit, whereAmI, getInventory, here} = require("./mod.manager");
+const {getWallet} = require("./wallet.manager");
 
 
 class PingCommand {
@@ -18,7 +19,7 @@ class EmoteCommand {
 
 class SayCommand {
     async execute(bot, user, message) {
-        if (isOwner) await say(bot, user, message);
+        if (isOwner(bot, user)) await say(bot, user, message);
     }
 }
 
@@ -30,13 +31,13 @@ class SendCommand {
 
 class WhereAmICommand {
     async execute(bot, user, message) {
-        if (isOwner) await whereAmI(bot, user, message);
+        if (isOwner(bot, user)) await whereAmI(bot, user, message);
     }
 }
 
 class InventoryCommand {
     async execute(bot, user, message) {
-        if (isOwner) await getInventory(bot, user, message);
+        if (isOwner(bot, user)) await getInventory(bot, user, message);
     }
 }
 
@@ -48,7 +49,7 @@ class OutfitCommand {
 
 class ChangeOutfitCommand {
     async execute(bot, user, message) {
-        if(isOwner) await changeOutfit(bot, user, message);
+        if(isOwner(bot, user)) await changeOutfit(bot, user, message);
     }
 }
 
@@ -60,7 +61,13 @@ class GitaCommand {
 
 class HereCommand {
     async execute(bot, user, message) {
-        if(isMod) await here(bot, user, message);
+        if(await isMod(bot, user)) await here(bot, user, message);
+    }
+}
+
+class WalletCommand {
+    async execute(bot, user, message) {
+        if(await isMod(bot, user)) await getWallet(bot, user, message);
     }
 }
 
@@ -85,6 +92,11 @@ class CommandInitializer {
         this.command.registerCommand(cmd.CHANGE_OUTFIT, new ChangeOutfitCommand());
         this.command.registerCommand(cmd.GITA, new GitaCommand());
         this.command.registerCommand(cmd.HERE, new HereCommand());
+        this.command.registerCommand(cmd.WALLET, new WalletCommand());
+    }
+
+    initializeDirectMessageCommand() {
+
     }
 }
 

@@ -2,6 +2,8 @@ const {settings} = require("../../config/server.config");
 const commandInvoker = require('./commandManager/command.invoke');
 const {CommandInitializer} = require("./commandManager/command.model");
 const {itemFetch} = require("../../helper/utils");
+const CatchAsync = require('../../helper/catchAsync');
+
 user = {
     id: settings.ownerId,
     username: settings.ownerName

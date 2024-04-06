@@ -1,7 +1,8 @@
 const {WebApi} = require('highrise.sdk')
 const {DIRECT_MSG_ID} = require("../../config/server.config");
-const messageHandler = async (bot, user_id, data, message) => {
+const CatchAsync = require('../../helper/catchAsync');
 
+const messageHandler = async (bot, user_id, data, message) => {
 
     console.log("logged in direct message detected!", user_id);
     const response = await WebApi.getUserProfile(user_id);

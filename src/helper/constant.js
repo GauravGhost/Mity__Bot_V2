@@ -11,7 +11,9 @@ const cmd = {
     INVENTORY: 'inventory',
 
     GITA: 'gita',
-    HERE: 'here'
+    HERE: 'here',
+
+    WALLET: 'wallet',
 }
 
 module.exports = {

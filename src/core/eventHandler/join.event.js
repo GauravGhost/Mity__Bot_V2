@@ -1,4 +1,5 @@
 const {settings} = require("../../config/server.config");
+const CatchAsync = require('../../helper/catchAsync');
 const joinHandler = async (bot, user) => {
     bot.message.send(`@${user.username} Welcome to the ${settings.roomName}`);
 

@@ -1,6 +1,5 @@
 const {Highrise, GatewayIntentBits} = require("highrise.sdk");
 const {settings} = require('../config/server.config');
-const CatchAsync = require('../helper/catchAsync');
 
 const {
     Ready,

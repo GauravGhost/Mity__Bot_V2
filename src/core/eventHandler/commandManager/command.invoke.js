@@ -10,7 +10,7 @@ class CommandInvoker {
     async executeCommand(commandName, ...args) {
         const command = this.commands[commandName];
         if (command) {
-            await command.execute(...args);
+            return await command.execute(...args);
         }
     }
 }

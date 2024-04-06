@@ -1,3 +1,4 @@
+const CatchAsync = require('../../helper/catchAsync');
 const leaveHandler = async (bot, user) => {
     console.log(`[PLAYER LEFT]: ${user.username}:${user.id}`);
 }

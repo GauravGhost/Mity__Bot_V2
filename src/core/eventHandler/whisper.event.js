@@ -1,4 +1,5 @@
 const {chatHandler} = require("./chat.event");
+const CatchAsync = require('../../helper/catchAsync');
 
 const whisperHandler = async (bot, user, message) => {
     // Fetching Permission of user if he is mod or not.
