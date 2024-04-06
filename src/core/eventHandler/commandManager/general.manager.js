@@ -3,6 +3,9 @@ const {getRandomEmote, getEmoteList, emoteNameToId, isMod, randomNumberInRange} 
 const {usernameToId} = require("../../../helper/user.helper");
 const {getSummaryByChapter, getVerse} = require("../../../external/bhagwad.gita.api");
 const WordStream = require('../../../helper/stream.helper');
+const {ChatError} = require("../../../error/chat.error");
+const {floorPath} = require("../../../helper/path.helper");
+const {isFileExist, readFileSync} = require("../../../helper/fs.helper");
 
 
 const ping = async (bot) => {
@@ -136,8 +139,28 @@ const getGitaVerse = async (bot, chapterNumber, verseNumber) => {
     }
 }
 
+const floor = async (bot, user, message) => {
+    const commands = message.split(' ');
+    const floorNumber = +commands[1];
+    if(isNaN(floorNumber)) throw new ChatError(`Floor Number must be a number`);
+
+    const filePath = floorPath();
+    if(!isFileExist(filePath)) throw new Error(`Please Enter Correct file path`);
+    const floorData = JSON.parse(readFileSync(filePath));
+
+    let position;
+    if(floorNumber === 1) {
+        position = floorData[0].position;
+    } else if (floorNumber === 2) {
+        position = floorData[1].position;
+    }
+    await bot.player.teleport(user.id, position.x, position.y, position.z);
+
+}
+
 module.exports = {
     ping,
     emote,
-    gita
+    gita,
+    floor
 }

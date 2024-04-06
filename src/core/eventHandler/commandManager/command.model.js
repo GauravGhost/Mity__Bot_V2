@@ -1,4 +1,4 @@
-const {ping, emote, gita} = require("./general.manager");
+const {ping, emote, gita, floor} = require("./general.manager");
 const {isMod, isOwner} = require("../../../helper/utils");
 const {cmd} = require("../../../helper/constant");
 const {say, sendMessageToUser, getOutfit, changeOutfit, whereAmI, getInventory, here} = require("./mod.manager");
@@ -84,6 +84,12 @@ class TipCommand {
     }
 }
 
+class FloorCommand{
+    async execute(bot, user, message) {
+        await floor(bot, user, message);
+    }
+}
+
 /**
  * @description Initialize the commands in the given Command Class.
  * @constructor commandInvoker
@@ -108,6 +114,7 @@ class CommandInitializer {
         this.command.registerCommand(cmd.WALLET, new WalletCommand());
         this.command.registerCommand(cmd.BUY, new BuyCommand());
         this.command.registerCommand(cmd.TIP, new TipCommand());
+        this.command.registerCommand(cmd.FLOOR, new FloorCommand());
     }
 
     initializeDirectMessageCommand() {

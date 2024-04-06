@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "floor": 1,
+    "position": {
+      "x": 0.5,
+      "y": 0,
+      "z": 7.5,
+      "facing": "FrontRight"
+    }
+  },
+  {
+    "id": 2,
+    "floor": 2,
+    "position": {
+      "x": 4.5,
+      "y": 7.850000381469727,
+      "z": 6.5,
+      "facing": "FrontLeft"
+    }
+  }
+]

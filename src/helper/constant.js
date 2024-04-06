@@ -13,6 +13,8 @@ const cmd = {
     WALLET: 'wallet',
     BUY: 'buy',
     TIP: 'tip',
+    FLOOR: 'floor',
+
 }
 
 const Facing = {

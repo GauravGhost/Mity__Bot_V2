@@ -15,7 +15,7 @@ module.exports = {
      * @return {*}
      */
     getRandomIndex: (maxLength) => {
-        return Math.floor(Math.random() * emotes.length);
+        return Math.floor(Math.random() * maxLength);
     },
     /**
      * @description Return the Array of emotes with numbering
