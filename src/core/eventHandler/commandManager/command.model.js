@@ -2,7 +2,7 @@ const {ping, emote, gita} = require("./general.manager");
 const {isMod, isOwner} = require("../../../helper/utils");
 const {cmd} = require("../../../helper/constant");
 const {say, sendMessageToUser, getOutfit, changeOutfit, whereAmI, getInventory, here} = require("./mod.manager");
-const {getWallet} = require("./wallet.manager");
+const {wallet, buy} = require("./wallet.manager");
 
 
 class PingCommand {
@@ -67,7 +67,13 @@ class HereCommand {
 
 class WalletCommand {
     async execute(bot, user, message) {
-        if(await isMod(bot, user)) await getWallet(bot, user, message);
+        if(await isMod(bot, user)) await wallet(bot, user, message);
+    }
+}
+
+class BuyCommand {
+    async execute(bot, user, message) {
+        if(await isMod(bot, user)) await buy(bot, user, message);
     }
 }
 
@@ -93,6 +99,7 @@ class CommandInitializer {
         this.command.registerCommand(cmd.GITA, new GitaCommand());
         this.command.registerCommand(cmd.HERE, new HereCommand());
         this.command.registerCommand(cmd.WALLET, new WalletCommand());
+        this.command.registerCommand(cmd.BUY, new BuyCommand());
     }
 
     initializeDirectMessageCommand() {

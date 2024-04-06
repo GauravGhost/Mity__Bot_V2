@@ -14,6 +14,7 @@ const cmd = {
     HERE: 'here',
 
     WALLET: 'wallet',
+    BUY: 'buy'
 }
 
 module.exports = {
